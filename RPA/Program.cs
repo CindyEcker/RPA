@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -63,11 +64,35 @@ namespace RPA
 
                     //Visualizar el primer archivo
                     Thread.Sleep(sleepTime);
-                    driver.FindElement(By.CssSelector("#content > div > div.ef-main > div > div > div > div:nth-child(3) > div.ef-name-col > a")).Click();
-
-                    //Descargar
+                    // buscamos los elementos que sean descargables
+                    var elementosDescargables = driver.FindElements(By.CssSelector("#content > div > div.ef-main > div > div > div > div > div.ef-name-col > a"));
+                    // buscamos los elementos que sean validos para descargar, pdf, word, powerpoint
+                    var elementosValido =
+                            elementosDescargables.Where(r => r.Text.ToLower().Contains(".ppt") || r.Text.ToLower().Contains(".pdf") || r.Text.ToLower().Contains(".docs"));
                     Thread.Sleep(sleepTime);
-                    driver.FindElement(By.CssSelector("body > span > span > span > div > div.ef-file-preview-header > div > a > span")).Click();
+                    IWebElement downloadButton = null;
+
+                    // Buscamos un elemento que se pueda descargar.
+                    // Existen elementos que aparecen pero no se pueden descargar porque no
+                    // esta lista la fecha
+
+                    foreach(var elemento in elementosValido)
+                    {
+                        try
+                        {
+                            elemento.Click();
+                            downloadButton = driver.FindElement(By.CssSelector("body > span > span > span > div > div.ef-file-preview-header > div > a > span"));
+                            break;
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+
+                    // Click descarga
+                    downloadButton.Click();
+                    //Descargar
                     Thread.Sleep(sleepTime);
 
                     //driver.Close();
