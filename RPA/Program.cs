@@ -15,7 +15,10 @@ namespace RPA
             //Desktop como carpeta de descarga
             var options = new ChromeOptions();
             String path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            Console.WriteLine(path);
             options.AddUserProfilePreference("download.default_directory", path);
+            options.AddUserProfilePreference("download.prompt_for_download", false);
+            options.AddUserProfilePreference("download.directory_upgrade", true);
 
             try
             {
