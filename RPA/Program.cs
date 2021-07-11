@@ -52,7 +52,6 @@ namespace RPA
 
                     //Seleccionar la primera materia
                     Thread.Sleep(sleepTime);
-                    //driver.FindElement(By.CssSelector("#DashboardCard_Container > div > div > div:nth-child(1)")).Click();
                     driver.FindElement(By.Id("global_nav_courses_link")).Click();
                     Thread.Sleep(1000);
                     driver.FindElement(By.CssSelector("#nav-tray-portal > span > span > div > " +
@@ -62,13 +61,14 @@ namespace RPA
                     Thread.Sleep(sleepTime);
                     driver.FindElement(By.ClassName("files")).Click();
 
-                    //Visualizar el primer archivo
+                    //Buscar los elementos descargables
                     Thread.Sleep(sleepTime);
-                    // buscamos los elementos que sean descargables
                     var elementosDescargables = driver.FindElements(By.CssSelector("#content > div > div.ef-main > div > div > div > div > div.ef-name-col > a"));
-                    // buscamos los elementos que sean validos para descargar, pdf, word, powerpoint
-                    var elementosValido =
-                            elementosDescargables.Where(r => r.Text.ToLower().Contains(".ppt") || r.Text.ToLower().Contains(".pdf") || r.Text.ToLower().Contains(".docs"));
+                    
+                    // Buscar los elementos que sean válidos para descargar: pdf, word o powerpoint
+                    var elementosValido = elementosDescargables.Where(r => r.Text.ToLower().Contains(".ppt") ||
+                                        r.Text.ToLower().Contains(".pdf") || r.Text.ToLower().Contains(".doc"));
+
                     Thread.Sleep(sleepTime);
                     IWebElement downloadButton = null;
 
@@ -90,9 +90,8 @@ namespace RPA
                         }
                     }
 
-                    // Click descarga
+                    // Descargar
                     downloadButton.Click();
-                    //Descargar
                     Thread.Sleep(sleepTime);
 
                     //driver.Close();
