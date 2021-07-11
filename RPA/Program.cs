@@ -9,8 +9,8 @@ namespace RPA
     {
         static void Main(string[] args)
         {
-            String user = "j.pache2@unapec.edu.do";
-            String pass = "P@ulin023!";
+            String user = "";
+            String pass = "";
 
             //Desktop como carpeta de descarga
             var options = new ChromeOptions();
@@ -65,6 +65,7 @@ namespace RPA
                     //Descargar
                     Thread.Sleep(sleepTime);
                     driver.FindElement(By.CssSelector("body > span > span > span > div > div.ef-file-preview-header > div > a > span")).Click();
+                    Thread.Sleep(sleepTime);
 
                     //driver.Close();
                 }
