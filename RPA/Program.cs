@@ -48,6 +48,7 @@ namespace RPA
                 Thread.Sleep(5000);
                 //driver.FindElement(By.CssSelector("#DashboardCard_Container > div > div > div:nth-child(1)")).Click();
                 driver.FindElement(By.Id("global_nav_courses_link")).Click();
+                Thread.Sleep(1000);
                 driver.FindElement(By.CssSelector("#nav-tray-portal > span > span > div > " +
                     "div > div > div > div > ul:nth-child(3) > li:nth-child(1) > a")).Click();
 
