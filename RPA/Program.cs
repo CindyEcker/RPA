@@ -27,8 +27,8 @@ namespace RPA
 
                 //Seleccionar modulo de estudiantes
                 Thread.Sleep(5000);
-                IWebElement button = driver.FindElement(By.CssSelector("body > header > div > div.row.header-info > div.botones-opcion.col-12 > div > div:nth-child(1) > a"));
-                button.Click();
+                driver.FindElement(By.CssSelector("body > header > div > div.row.header-info > " +
+                    "div.botones-opcion.col-12 > div > div:nth-child(1) > a")).Click();
 
                 //Ingresar correo
                 Thread.Sleep(5000);
@@ -46,7 +46,10 @@ namespace RPA
 
                 //Seleccionar la primera materia
                 Thread.Sleep(5000);
-                driver.FindElement(By.CssSelector("#DashboardCard_Container > div > div > div:nth-child(1)")).Click();
+                //driver.FindElement(By.CssSelector("#DashboardCard_Container > div > div > div:nth-child(1)")).Click();
+                driver.FindElement(By.Id("global_nav_courses_link")).Click();
+                driver.FindElement(By.CssSelector("#nav-tray-portal > span > span > div > " +
+                    "div > div > div > div > ul:nth-child(3) > li:nth-child(1) > a")).Click();
 
                 //Ir a archivos
                 Thread.Sleep(5000);
